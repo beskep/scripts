@@ -1,0 +1,93 @@
+[project]
+name = "scripts"
+version = "0.1.0"
+description = "Personal scripts"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "argparse-tui>=0.2.1",
+    "cyclopts>=3.3.1",
+    "ffmpeg-normalize>=1.31.0",
+    "jinja2>=3.1.5",
+    "loguru>=0.7.3",
+    "pandas>=2.2.3",
+    "polars>=1.20.0",
+    "rich>=13.9.4",
+    "textual>=1.0.0",
+    "trogon>=0.6.0",
+    "windows-toasts>=1.3.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1",
+    "pillow>=11.1.0",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-sugar>=1.0.0",
+    "ruff>=0.9.3",
+]
+
+[tool.uv]
+override-dependencies = ["argparse-tui"]
+
+[tool.ruff]
+preview = true
+respect-gitignore = false
+output-format = "concise"
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ANN",    # flake8-annotations
+    "COM",    # flake8-commas
+    "CPY",    # flake8-copyright
+    "D",      # pydocstyle
+    "E1",     # pycodestyle: E1*
+    "E2",     # pycodestyle: E2*
+    "FIX",    # flake8-fixme
+    "ISC001", # flake8-implicit-str-concat: single-line-implicit-string-concatenation
+    "PD",     # pandas-vet
+    "Q",      # flake8-quotes
+    "S",      # flake8-bandit
+    "TD",     # flake8-todos
+]
+extend-safe-fixes = [
+    'TC', # flake8-type-checking
+    'EM', # flake8-errmsg
+    'PT', # flake8-pytest-style
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+
+[tool.mypy]
+disable_error_code = ["var-annotated", "import"]
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "-v",
+    "--doctest-glob='scripts'",
+    "--cov=scripts",
+    "--cov-report",
+    "html",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "@(abc\\.)?abstractmethod",
+    "if __name__ == .__main__.:",
+    "if (typing\\.)?TYPE_CHECKING:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]

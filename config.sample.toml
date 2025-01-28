@@ -1,0 +1,60 @@
+[rptl]
+batch_size = 100
+linebreak_threshold = 12
+dev_script = """
+init 9999 python:
+    config.developer = True
+    config.console = True
+
+    if 'mousedown_5' not in config.keymap['dismiss']:
+        config.keymap['dismiss'].append('mousedown_5')
+
+    try:
+        config.underlay[0].keymap['quickSave'] = QuickSave()
+        config.keymap['quickSave'] = 'K_F5'
+    except:
+        pass
+
+    try:
+        config.underlay[0].keymap['quickLoad'] = QuickLoad()
+        config.keymap['quickLoad'] = 'K_F9'
+    except:
+        pass
+"""
+
+[rptl.preserve]
+files = ['gui', 'screens']
+words = [
+    'About',
+    'After Choices',
+    'Auto',
+    'Back',
+    'Disable',
+    'Display',
+    'Enter',
+    'Escape',
+    'Fullscreen',
+    'Help',
+    'History',
+    'Load',
+    'Main Menu',
+    'Menu',
+    'No',
+    'Preference',
+    'Preferences',
+    'Prefs',
+    'Q.Load',
+    'Q.Save',
+    'Quit',
+    'Return',
+    'Rollback Side',
+    'Save',
+    'Skip',
+    'Space',
+    'Start',
+    'Tab',
+    'Transitions',
+    'Unseen Text',
+    'Window',
+    'Yes',
+]
