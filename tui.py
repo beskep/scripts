@@ -99,6 +99,7 @@ class Tui(tui.Tui):
             options=[
                 ts.OptionSchema('--paths', value=dirs, choices=dirs, multiple=True),
                 ts.OptionSchema('--codec', default=codecs[0], choices=codecs),
+                ts.OptionSchema('--extension', default='7z'),
                 ts.OptionSchema('--compression', int),
                 ts.OptionSchema('--extra'),
             ],
@@ -141,7 +142,7 @@ class Tui(tui.Tui):
 
         app.meta(args)
 
-    def run(self, **kwargs) -> None:
+    def run(self, **kwargs) -> None:  # type: ignore[override]
         try:
             super(tui.Tui, self).run(**kwargs)
         finally:
