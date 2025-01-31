@@ -3,7 +3,7 @@ from __future__ import annotations
 import dataclasses as dc
 import shutil
 import subprocess as sp
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
 import rich
 from loguru import logger
@@ -23,6 +23,9 @@ LogLevel = Literal[0, 1, 2]
 @dc.dataclass
 class Config:
     codec: Codec = 'zstd'
+
+    extension: str | None = 'auto'
+    """압축파일 확장자. `auto`면 코덱에 따라 선택."""
 
     compression: int = 0
     """압축 레벨. 1에서 9 사이 또는 0 (nanazipc 기본값)."""
@@ -52,6 +55,15 @@ class DirArchive:
     console: rich.console.Console = dc.field(default_factory=rich.get_console)
     _nanazipc: str = dc.field(init=False)
 
+    EXTENSION: ClassVar[dict[Codec, str]] = {
+        'zstd': 'zst',
+        'brotli': 'br',
+        'lz4': 'lz4',
+        'lz5': 'lz5',
+        'lizard': 'liz',
+        'flzma2': '7z',
+    }
+
     def __post_init__(self, nanazipc: str | Path | None):
         if (p := nanazipc or shutil.which('nanazipc')) is None:
             msg = 'Cannot find NanaZipC'
@@ -64,12 +76,18 @@ class DirArchive:
             raise NotADirectoryError(d)
 
         ds = d.as_posix().rstrip('/')
+        ext = (
+            self.EXTENSION.get(self.conf.codec, '7z')
+            if (self.conf.extension is None or self.conf.extension == 'auto')
+            else self.conf.extension
+        ).lstrip('.')
+
         return [
             self._nanazipc,
             'a',
             *self.conf.get_args(),
             '-sccUTF-8',
-            f'{ds}',
+            f'{ds}.{ext}',
             f'{ds}/*',
         ]
 
