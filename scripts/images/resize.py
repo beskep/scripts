@@ -186,7 +186,7 @@ class ConvertResizer(_ImageMagicResizer):
 
         ss, ds = 0, 0
 
-        for image in Progress.iter(images, transient=True):
+        for image in Progress.iter(images, description='Resizing...', transient=True):
             resized = dst.joinpath(image.name)
             if s := self._conf.format:
                 resized = resized.with_suffix(f'.{s}')
@@ -232,6 +232,7 @@ class MogrifyResizer(_ImageMagicResizer):
         else:
             for line in Progress.iter(
                 sequence=self._mogrify(args),
+                description='Resizing...',
                 total=total,
                 transient=True,
             ):

@@ -24,7 +24,7 @@ LogLevel = Literal[0, 1, 2]
 class Config:
     codec: Codec = 'zstd'
 
-    extension: str | None = 'auto'
+    extension: str | None = '7z'
     """압축파일 확장자. `auto`면 코덱에 따라 선택."""
 
     compression: int = 0
@@ -108,7 +108,7 @@ class DirArchive:
         self.print_panel(p.stderr, title='stderr')
 
     def archive_each(self, *args: Path):
-        for d in Progress.iter(args):
+        for d in Progress.iter(args, description='Archiving...'):
             logger.info('target="{}"', d)
 
             self.archive(d)

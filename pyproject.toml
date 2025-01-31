@@ -5,7 +5,7 @@ description = "Personal scripts"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "argparse-tui>=0.2.1",
+    "argparse-tui>=0.3.1",
     "cyclopts>=3.3.1",
     "ffmpeg-normalize>=1.31.0",
     "jinja2>=3.1.5",
@@ -13,8 +13,6 @@ dependencies = [
     "pandas>=2.2.3",
     "polars>=1.20.0",
     "rich>=13.9.4",
-    "textual>=1.0.0",
-    "trogon>=0.6.0",
     "windows-toasts>=1.3.0",
 ]
 
@@ -27,9 +25,6 @@ dev = [
     "pytest-sugar>=1.0.0",
     "ruff>=0.9.3",
 ]
-
-[tool.uv]
-override-dependencies = ["argparse-tui"]
 
 [tool.ruff]
 preview = true
