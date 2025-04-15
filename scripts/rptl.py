@@ -233,7 +233,7 @@ class RenpyTranslation:
         preserve: bool,
     ) -> str | None:
         if (
-            m.dst.startswith(m.src)  ##
+            m.dst.startswith(m.src)  # fmt
             or (m.src.startswith('old:') and m.dst.startswith('new:'))
         ):
             return None

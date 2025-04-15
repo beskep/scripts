@@ -38,23 +38,20 @@ quote-style = "single"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "ANN",    # flake8-annotations
-    "COM",    # flake8-commas
-    "CPY",    # flake8-copyright
-    "D",      # pydocstyle
-    "E1",     # pycodestyle: E1*
-    "E2",     # pycodestyle: E2*
-    "FIX",    # flake8-fixme
-    "ISC001", # flake8-implicit-str-concat: single-line-implicit-string-concatenation
-    "PD",     # pandas-vet
-    "Q",      # flake8-quotes
-    "S",      # flake8-bandit
-    "TD",     # flake8-todos
+    "ANN", # flake8-annotations
+    "COM", # flake8-commas
+    "CPY", # flake8-copyright
+    "D",   # pydocstyle
+    "FIX", # flake8-fixme
+    "PD",  # pandas-vet
+    "Q",   # flake8-quotes
+    "S",   # flake8-bandit
+    "TD",  # flake8-todos
 ]
 extend-safe-fixes = [
-    'TC', # flake8-type-checking
     'EM', # flake8-errmsg
     'PT', # flake8-pytest-style
+    'TC', # flake8-type-checking
 ]
 
 [tool.ruff.lint.pydocstyle]
@@ -70,13 +67,7 @@ warn_unused_ignores = true
 warn_unused_configs = true
 
 [tool.pytest.ini_options]
-addopts = [
-    "-v",
-    "--doctest-glob='scripts'",
-    "--cov=scripts",
-    "--cov-report",
-    "html",
-]
+addopts = ["-v", "--doctest-modules", "--cov=scripts", "--cov-report", "html"]
 
 [tool.coverage.report]
 exclude_also = [

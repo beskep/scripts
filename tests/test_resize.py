@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses as dc
 import shutil
+from typing import ClassVar
 
 import numpy as np
 import pytest
@@ -17,8 +18,8 @@ class ImageGenerator:
     upscale: int = 2
     rng: np.random.Generator = dc.field(default_factory=np.random.default_rng)
 
-    FORMATS = ('jpg', 'jpeg', 'png', 'bmp')
-    LOSSLESS = ('png', 'bmp')
+    FORMATS: ClassVar[tuple[str, ...]] = ('jpg', 'jpeg', 'png', 'bmp')
+    LOSSLESS: ClassVar[tuple[str, ...]] = ('png', 'bmp')
 
     def __call__(self, n: int = 0, upscale: int = 0):
         n = n or self.n
