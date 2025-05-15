@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses as dc
+import os
 import shutil
 import subprocess as sp
 from typing import TYPE_CHECKING, ClassVar, Literal
@@ -108,9 +109,10 @@ class DirArchive:
         self.print_panel(p.stderr, title='stderr')
 
     def archive_each(self, *args: Path):
-        for d in Progress.iter(args, description='Archiving...'):
-            logger.info('target="{}"', d)
+        common = os.path.commonpath(args) if len(args) > 1 else ''
 
+        for d in Progress.iter(args, description='Archiving...'):
+            logger.info('target="{}"', d.relative_to(common))
             self.archive(d)
 
 

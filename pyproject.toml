@@ -26,6 +26,10 @@ dev = [
     "ruff>=0.9.3",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [tool.ruff]
 preview = true
 respect-gitignore = false
@@ -49,9 +53,9 @@ ignore = [
     "TD",  # flake8-todos
 ]
 extend-safe-fixes = [
-    'EM', # flake8-errmsg
-    'PT', # flake8-pytest-style
-    'TC', # flake8-type-checking
+    "EM", # flake8-errmsg
+    "PT", # flake8-pytest-style
+    "TC", # flake8-type-checking
 ]
 
 [tool.ruff.lint.pydocstyle]

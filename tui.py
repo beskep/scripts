@@ -101,6 +101,7 @@ class Tui(tui.Tui):
                 ts.OptionSchema('--codec', default=codecs[0], choices=codecs),
                 ts.OptionSchema('--extension', default='7z'),
                 ts.OptionSchema('--compression', int),
+                ts.OptionSchema('--log', int, default=1),
                 ts.OptionSchema('--extra'),
             ],
         )

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, ClassVar, TypeVar
+from typing import TYPE_CHECKING, ClassVar
 
 import rich
 from loguru import logger
@@ -21,8 +21,6 @@ if TYPE_CHECKING:
 
 __all__ = ['LogHandler', 'Progress']
 
-
-T = TypeVar('T')
 
 console = rich.get_console()
 console.push_theme(Theme({'logging.level.success': 'bold blue'}))
@@ -122,7 +120,7 @@ class Progress(pg.Progress):
         )
 
     @classmethod
-    def iter(
+    def iter[T](
         cls,
         sequence: Sequence[T] | Iterable[T],
         *,
