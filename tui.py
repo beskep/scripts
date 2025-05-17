@@ -5,6 +5,7 @@ import typing
 from pathlib import Path
 
 import argparse_tui.schemas as ts
+import rich
 from argparse_tui import tui
 
 from cli import app
@@ -141,6 +142,7 @@ class Tui(tui.Tui):
             extra = args.pop(idx)
             args = [*args, *extra.split(' ')]
 
+        rich.print(f'args={args}')
         app.meta(args)
 
     def run(self, **kwargs) -> None:  # type: ignore[override]

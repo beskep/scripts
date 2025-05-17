@@ -109,10 +109,10 @@ class DirArchive:
         self.print_panel(p.stderr, title='stderr')
 
     def archive_each(self, *args: Path):
-        common = os.path.commonpath(args) if len(args) > 1 else ''
+        common = os.path.commonpath(args) if len(args) > 1 else None
 
         for d in Progress.iter(args, description='Archiving...'):
-            logger.info('target="{}"', d.relative_to(common))
+            logger.info('target="{}"', d.relative_to(common) if common else d)
             self.archive(d)
 
 
